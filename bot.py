@@ -7,7 +7,7 @@ TOKEN = "8680233592:AAFSsX5K7eY3h48soknXtiKQrSfFeZVjD80"
 ADMIN_ID = 836376839
 
 bot = telebot.TeleBot(TOKEN)
-app = Flask(_name_)
+app = Flask(__name__)
 
 # база
 conn = sqlite3.connect("stories.db", check_same_thread=False)
