@@ -1,4 +1,4 @@
-import pyTelegramBotAPI
+import telebot
 import sqlite3
 from flask import Flask
 import threading
