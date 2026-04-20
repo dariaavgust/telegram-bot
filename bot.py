@@ -3,8 +3,8 @@ import sqlite3
 from flask import Flask
 import threading
 
-TOKEN = "ВСТАВЬ_ТОКЕН"
-ADMIN_ID = 123456789
+TOKEN = "8680233592:AAFSsX5K7eY3h48soknXtiKQrSfFeZVjD80"
+ADMIN_ID = 836376839
 
 bot = telebot.TeleBot(TOKEN)
 app = Flask(name)
