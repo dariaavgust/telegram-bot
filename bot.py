@@ -39,18 +39,38 @@ def home():
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id,
-        "Привет, балаганец!\n\n"
-        "Отправь свою историю (до 500 символов)"
+        "Привет, балаганец!Рады тебя видеть.\n\n"
+        "Отправь файл со своей историей"
     )
 
-@bot.message_handler(func=lambda message: True)
+@bot.message_handler(content_types=['text'])
 def handle(message):
     text = message.text
     user_id = message.chat.id
     username = message.from_user.username or "no_username"
+    
+@bot.message_handler(content_types=['document'])
+def handle_document(message):
+    user_id = message.chat.id
+    username = message.from_user.username or "no_username"
 
-    if len(text) > 500:
-        bot.send_message(user_id, "Слишком длинная история (до 500)")
+    # сообщение пользователю
+    bot.send_message(user_id, "Спасибо! Файл отправлен редактору 📎")
+
+    # сообщение тебе (кто отправил)
+    bot.send_message(
+        ADMIN_ID,
+        f"📩 НОВЫЙ ФАЙЛ\n\n👤 @{username}\nID: {user_id}"
+    )
+
+    # 🔥 пересылка самого файла
+    bot.forward_message(
+        ADMIN_ID,
+        user_id,
+        message.message_id
+    )
+    if len(text) > 1500:
+        bot.send_message(user_id, "Слишком длинная история (до 1500 символов)")
         return
 
     save_story(user_id, username, text)
